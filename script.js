@@ -1,3 +1,16 @@
+const search = document.querySelector(".js-search");
+
+search.addEventListener("submit", onSubmit);
+
+function onSubmit(evt) {
+  evt.preventDefault();
+  console.log(evt.currentTarget.elements);
+  const { days, query } = evt.currentTarget.elements;
+  greatWeater(query.value, days.value)
+    .then((error) => console.log(error))
+    .catch((error) => console.log(error));
+}
+
 function greatWeater(city, days) {
   const BASE_URL = "http://api.weatherapi.com/v1";
   const API_KEY = "6fba6087a507449abdf103545231408";
@@ -11,9 +24,5 @@ function greatWeater(city, days) {
     return resp.json();
   });
 }
-
-greatWeater("Kiev", 5)
-  .then((error) => console.log(error))
-  .catch((error) => console.log(error));
 
 // http://api.weatherapi.com/v1/forecast.json?key=6fba6087a507449abdf103545231408&q=Paris&days=5
